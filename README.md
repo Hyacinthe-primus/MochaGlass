@@ -2,20 +2,26 @@
 
 A Catppuccin Mocha, glass-style desktop setup for Windows, built on top of Komorebi (tiling window manager), YASB (status bar), Cava (audio visualizer), and Flow Launcher, with a custom native widget for monitoring connected serial boards, phones, and USB drives.
 
-![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D6?style=for-the-badge&logo=windows11&logoColor=white)
-![Theme](https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7?style=for-the-badge&logo=github&logoColor=white)
-![WM](https://img.shields.io/badge/window%20manager-Komorebi-89b4fa?style=for-the-badge)
-![Bar](https://img.shields.io/badge/status%20bar-YASB-f9e2af?style=for-the-badge)
-![Rust](https://img.shields.io/badge/device__status-Rust-f38ba8?style=for-the-badge&logo=rust&logoColor=white)
+<p align="center">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%2010%2F11-0078D6?style=for-the-badge&amp;logo=windows11&amp;logoColor=white">
+  <img alt="Theme" src="https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7?style=for-the-badge&amp;logo=github&amp;logoColor=white">
+  <img alt="Window manager" src="https://img.shields.io/badge/window%20manager-Komorebi-89b4fa?style=for-the-badge">
+  <img alt="Status bar" src="https://img.shields.io/badge/status%20bar-YASB-f9e2af?style=for-the-badge">
+  <img alt="device_status" src="https://img.shields.io/badge/device__status-Rust-f38ba8?style=for-the-badge&amp;logo=rust&amp;logoColor=white">
+</p>
 
-[![Build device_status](https://img.shields.io/github/actions/workflow/status/Hyacinthe-primus/MochaGlass/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/Hyacinthe-primus/MochaGlass/actions/workflows/ci.yml)
-[![Validate](https://img.shields.io/github/actions/workflow/status/Hyacinthe-primus/MochaGlass/validate.yml?branch=main&style=for-the-badge&label=validate)](https://github.com/Hyacinthe-primus/MochaGlass/actions/workflows/validate.yml)
+<p align="center">
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/actions/workflows/ci.yml"><img alt="Build device_status" src="https://img.shields.io/github/actions/workflow/status/Hyacinthe-primus/MochaGlass/ci.yml?branch=main&amp;style=for-the-badge&amp;label=build"></a>
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/actions/workflows/validate.yml"><img alt="Validate" src="https://img.shields.io/github/actions/workflow/status/Hyacinthe-primus/MochaGlass/validate.yml?branch=main&amp;style=for-the-badge&amp;label=validate"></a>
+</p>
 
-[![Stars](https://img.shields.io/github/stars/Hyacinthe-primus/MochaGlass?style=for-the-badge&color=cba6f7)](https://github.com/Hyacinthe-primus/MochaGlass/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/Hyacinthe-primus/MochaGlass?style=for-the-badge&color=94e2d5)](https://github.com/Hyacinthe-primus/MochaGlass/commits)
-[![Latest release](https://img.shields.io/github/v/release/Hyacinthe-primus/MochaGlass?style=for-the-badge&color=f9e2af)](https://github.com/Hyacinthe-primus/MochaGlass/releases)
-[![Issues](https://img.shields.io/github/issues/Hyacinthe-primus/MochaGlass?style=for-the-badge&color=f38ba8)](https://github.com/Hyacinthe-primus/MochaGlass/issues)
-[![License](https://img.shields.io/badge/license-MIT-a6e3a1?style=for-the-badge)](LICENSE.md)
+<p align="center">
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Hyacinthe-primus/MochaGlass?style=for-the-badge&amp;color=cba6f7"></a>
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/commits"><img alt="Last commit" src="https://img.shields.io/github/last-commit/Hyacinthe-primus/MochaGlass?style=for-the-badge&amp;color=94e2d5"></a>
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/Hyacinthe-primus/MochaGlass?style=for-the-badge&amp;color=f9e2af"></a>
+  <a href="https://github.com/Hyacinthe-primus/MochaGlass/issues"><img alt="Issues" src="https://img.shields.io/github/issues/Hyacinthe-primus/MochaGlass?style=for-the-badge&amp;color=f38ba8"></a>
+  <a href="LICENSE.md"><img alt="License" src="https://img.shields.io/badge/license-MIT-a6e3a1?style=for-the-badge"></a>
+</p>
 
 ---
 
@@ -192,12 +198,12 @@ This produces:
 .config\cava\config
 .config\whkdrc
 komorebi.json
-AppData\Roaming\FlowLauncher\Themes\TranslucentFlow.xaml
+AppData\Roaming\FlowLauncher\Themes\MochaGlass.xaml
 ```
 
 **Option B: use the raw templates**
 
-Copy the contents of `MochaGlass_YASB/` into `C:\Users\<YourUsername>\.config\yasb\`, and the contents of `MochaGlass_Cava/` into `C:\Users\<YourUsername>\.config\cava\`. Copy `MochaGlass_Komorebi\komorebi.json` to `C:\Users\<YourUsername>\komorebi.json` and `MochaGlass_Komorebi\whkdrc` to `C:\Users\<YourUsername>\.config\whkdrc`. Copy `MochaGlass_FlowLauncher\TranslucentFlow.xaml` into `C:\Users\<YourUsername>\AppData\Roaming\FlowLauncher\Themes\`. This is the same content as `default.config.zip`, but as plain files instead of an archive, useful if you want to diff or version your own changes before deploying them.
+Copy the contents of `MochaGlass_YASB/` into `C:\Users\<YourUsername>\.config\yasb\`, and the contents of `MochaGlass_Cava/` into `C:\Users\<YourUsername>\.config\cava\`. Copy `MochaGlass_Komorebi\komorebi.json` to `C:\Users\<YourUsername>\komorebi.json` and `MochaGlass_Komorebi\whkdrc` to `C:\Users\<YourUsername>\.config\whkdrc`. Copy `MochaGlass_FlowLauncher\MochaGlass.xaml` into `C:\Users\<YourUsername>\AppData\Roaming\FlowLauncher\Themes\`. This is the same content as `default.config.zip`, but as plain files instead of an archive, useful if you want to diff or version your own changes before deploying them.
 
 All labels in the YASB bar are in English, including the device status widget (`No device`, `device(s) connected`). If you still see the old French label `carte(s) connectée(s)`, you extracted an old release archive; use the installer or the latest `default.config.zip`.
 
@@ -238,7 +244,7 @@ The main whkd bindings are:
 ### 4. Get device_status.exe
 
 1. Go to the [Releases](https://github.com/Hyacinthe-primus/MochaGlass/releases) page of this repository
-2. Download `device_status.exe` from the latest release (currently `v1.0.3`, which matches the crate version)
+2. Download `device_status.exe` from the latest release (currently `v1.0.4`, which matches the crate version)
 3. Move it into `C:\Users\<YourUsername>\scripts\`
 
 ### 5. Set up Windows Terminal
@@ -270,9 +276,9 @@ This is left out of the shipped `settings.json` on purpose since not everyone ha
 
 ### 6. Set up Flow Launcher
 
-1. Copy `MochaGlass_FlowLauncher/TranslucentFlow.xaml` into `C:\Users\<YourUsername>\AppData\Roaming\FlowLauncher\Themes\`
+1. Copy `MochaGlass_FlowLauncher/MochaGlass.xaml` into `C:\Users\<YourUsername>\AppData\Roaming\FlowLauncher\Themes\`
 2. Open Flow Launcher, go to **Settings**, and select:
-   - **Theme**: `TranslucentFlow`
+   - **Theme**: `MochaGlass`
    - **Language**: `English`
    - **Color scheme**: `System`
 3. Restart Flow Launcher if the theme does not apply immediately.
@@ -320,7 +326,7 @@ cd device_status
 cargo build --release
 ```
 
-`build.rs` injects the Windows VERSIONINFO metadata (file description, product name, company, version) into the binary at compile time, straight from `Cargo.toml`, so there is no separate manifest step. The crate version is kept in sync with the release tags (`1.0.3` at the time of writing), which means the file properties on the built `.exe` show the same version as the GitHub release. The finished, self-contained binary lands at:
+`build.rs` injects the Windows VERSIONINFO metadata (file description, product name, company, version) into the binary at compile time, straight from `Cargo.toml`, so there is no separate manifest step. The crate version is kept in sync with the release tags (`1.0.4` at the time of writing), which means the file properties on the built `.exe` show the same version as the GitHub release. The finished, self-contained binary lands at:
 
 ```
 device_status\target\release\device_status.exe

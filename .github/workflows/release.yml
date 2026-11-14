@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing tag to publish (for example v1.0.3)"
+        description: "Existing tag to publish (for example v1.0.4)"
         required: true
         type: string
 
@@ -69,8 +69,8 @@ jobs:
           cp MochaGlass_Cava/config "$stage/.config/cava/config"
           cp MochaGlass_Komorebi/komorebi.json "$stage/komorebi.json"
           cp MochaGlass_Komorebi/whkdrc "$stage/.config/whkdrc"
-          cp MochaGlass_FlowLauncher/TranslucentFlow.xaml \
-            "$stage/AppData/Roaming/FlowLauncher/Themes/TranslucentFlow.xaml"
+          cp MochaGlass_FlowLauncher/MochaGlass.xaml \
+            "$stage/AppData/Roaming/FlowLauncher/Themes/MochaGlass.xaml"
           (cd "$stage" && zip -9 -r "$GITHUB_WORKSPACE/default.config.zip" \
             .config komorebi.json AppData)
 
@@ -83,7 +83,7 @@ jobs:
           unzip -Z1 default.config.zip | grep -qx '.config/cava/config'
           unzip -Z1 default.config.zip | grep -qx '.config/whkdrc'
           unzip -Z1 default.config.zip | grep -qx 'komorebi.json'
-          unzip -Z1 default.config.zip | grep -qx 'AppData/Roaming/FlowLauncher/Themes/TranslucentFlow.xaml'
+          unzip -Z1 default.config.zip | grep -qx 'AppData/Roaming/FlowLauncher/Themes/MochaGlass.xaml'
           unzip -p default.config.zip .config/yasb/config.yaml | grep -q 'device(s) connected'
           ! unzip -p default.config.zip .config/yasb/config.yaml | grep -q 'carte(s)'
 

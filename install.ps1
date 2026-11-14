@@ -116,9 +116,7 @@ $script:LogPath = Join-Path $env:TEMP ('mochaglass-install-{0}.log' -f (Get-Date
 $script:YasbExePath = ''
 $script:KomorebiExePath = ''
 
-# ---------------------------------------------------------------------------
 # Output helpers
-# ---------------------------------------------------------------------------
 
 function Write-Banner {
     Write-Host ''
@@ -322,9 +320,7 @@ function Invoke-Download {
     Invoke-WebRequest -Uri $Uri -OutFile $OutFile -UseBasicParsing
 }
 
-# ---------------------------------------------------------------------------
 # JSON / JSONC helpers (Windows Terminal settings are JSON with comments)
-# ---------------------------------------------------------------------------
 
 function Remove-JsonComments {
     param([string]$Text)
@@ -523,9 +519,7 @@ function Get-TerminalSettingsPath {
     return $null
 }
 
-# ---------------------------------------------------------------------------
 # Font helpers
-# ---------------------------------------------------------------------------
 
 function Test-FontFamilyInstalled {
     param([string]$Family)
@@ -646,9 +640,7 @@ public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, Int
     }
 }
 
-# ---------------------------------------------------------------------------
 # device_status helpers
-# ---------------------------------------------------------------------------
 
 function Build-DeviceStatus {
     $projectDir = Join-Path $script:RepoRoot 'device_status'
@@ -759,9 +751,7 @@ function Resolve-DeviceStatusBinary {
     throw 'Could not obtain device_status.exe. Pass -DeviceStatusSource <path> or install Rust and use -BuildWidget.'
 }
 
-# ---------------------------------------------------------------------------
 # YASB config helpers
-# ---------------------------------------------------------------------------
 
 function Get-YasbConfigDirectory {
     if ($ConfigRoot) {
@@ -797,9 +787,7 @@ function Set-YamlScalarLine {
     })
 }
 
-# ---------------------------------------------------------------------------
 # Main
-# ---------------------------------------------------------------------------
 
 Write-Banner
 
@@ -849,7 +837,7 @@ $requiredPaths = @(
     (Join-Path $script:RepoRoot 'MochaGlass_Cava\config'),
     (Join-Path $script:RepoRoot 'MochaGlass_Komorebi\komorebi.json'),
     (Join-Path $script:RepoRoot 'MochaGlass_Komorebi\whkdrc'),
-    (Join-Path $script:RepoRoot 'MochaGlass_FlowLauncher\TranslucentFlow.xaml'),
+    (Join-Path $script:RepoRoot 'MochaGlass_FlowLauncher\MochaGlass.xaml'),
     (Join-Path $script:RepoRoot 'MochaGlass_Terminal\settings.json')
 )
 
@@ -865,7 +853,7 @@ if ($missing.Count -gt 0) {
 Update-SessionPath
 $script:WingetAvailable = [bool](Get-Command winget -ErrorAction SilentlyContinue)
 
-# --- Step 1: applications ---------------------------------------------------
+# --- Step 1: applications
 Write-Section '1/9  Applications'
 
 if ($SkipApps) {
@@ -955,7 +943,7 @@ if ($SkipApps) {
     )
 }
 
-# --- Step 2: font -----------------------------------------------------------
+# --- Step 2: font
 Write-Section '2/9  JetBrainsMono Nerd Font'
 
 if ($SkipFont) {
@@ -996,7 +984,7 @@ if ($SkipFont) {
     }
 }
 
-# --- Step 3: YASB and Cava configs -----------------------------------------
+# --- Step 3: YASB and Cava configs
 Write-Section '3/9  YASB and Cava configuration'
 
 if ($SkipConfigs) {
@@ -1102,7 +1090,7 @@ if ($SkipConfigs) {
     }
 }
 
-# --- Step 4: Komorebi and whkd configuration --------------------------------
+# --- Step 4: Komorebi and whkd configuration
 Write-Section '4/9  Komorebi and whkd configuration'
 
 if ($SkipConfigs) {
@@ -1205,7 +1193,7 @@ if ($SkipConfigs) {
     }
 }
 
-# --- Step 5: Flow Launcher theme --------------------------------------------
+# --- Step 5: Flow Launcher theme
 Write-Section '5/9  Flow Launcher theme'
 
 if ($SkipConfigs) {
@@ -1213,18 +1201,18 @@ if ($SkipConfigs) {
     Add-Result 'Flow Launcher theme' 'skipped' '-SkipConfigs'
 } else {
     $flowRoot = Join-Path $env:APPDATA 'FlowLauncher'
-    $flowThemeSource = Join-Path $script:RepoRoot 'MochaGlass_FlowLauncher\TranslucentFlow.xaml'
+    $flowThemeSource = Join-Path $script:RepoRoot 'MochaGlass_FlowLauncher\MochaGlass.xaml'
     $flowThemesDir = Join-Path $flowRoot 'Themes'
-    $flowThemeTarget = Join-Path $flowThemesDir 'TranslucentFlow.xaml'
+    $flowThemeTarget = Join-Path $flowThemesDir 'MochaGlass.xaml'
     $flowSettingsPath = Join-Path $flowRoot 'Settings\Settings.json'
 
     if (-not (Test-Path -LiteralPath $flowRoot)) {
         Write-Note 'Flow Launcher has not been launched yet; start it once, then re-run this script to apply the theme.'
         Add-Result 'Flow Launcher theme' 'skipped' 'Flow Launcher settings not found'
     } elseif ($script:DryRun) {
-        Write-Note "[dry-run] install TranslucentFlow.xaml in $flowThemesDir"
-        Write-Note "[dry-run] set Flow Launcher theme to TranslucentFlow and language to English"
-        Add-Result 'Flow Launcher theme' 'dry-run' 'would install TranslucentFlow and set English'
+        Write-Note "[dry-run] install MochaGlass.xaml in $flowThemesDir"
+        Write-Note "[dry-run] set Flow Launcher theme to MochaGlass and language to English"
+        Add-Result 'Flow Launcher theme' 'dry-run' 'would install MochaGlass and set English'
     } else {
         try {
             $themeBackup = Backup-Path -Path $flowThemeTarget
@@ -1232,13 +1220,13 @@ if ($SkipConfigs) {
 
             New-Item -ItemType Directory -Path $flowThemesDir -Force | Out-Null
             Copy-Item -LiteralPath $flowThemeSource -Destination $flowThemeTarget -Force
-            Write-Good 'TranslucentFlow theme installed.'
+            Write-Good 'MochaGlass theme installed.'
 
             if (Test-Path -LiteralPath $flowSettingsPath) {
                 $flowRaw = [IO.File]::ReadAllText($flowSettingsPath)
                 $flowSettings = ConvertTo-HashtableDeep (Remove-JsonComments $flowRaw | ConvertFrom-Json)
 
-                $flowSettings['Theme'] = 'TranslucentFlow'
+                $flowSettings['Theme'] = 'MochaGlass'
                 $flowSettings['Language'] = 'en'
                 $flowSettings['ColorScheme'] = 'System'
                 $flowSettings['UseDropShadowEffect'] = $true
@@ -1250,12 +1238,12 @@ if ($SkipConfigs) {
                 $flowJson = $flowSettings | ConvertTo-Json -Depth 100
                 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                 [IO.File]::WriteAllText($flowSettingsPath, $flowJson, $utf8NoBom)
-                Write-Good 'Flow Launcher set to TranslucentFlow with English labels.'
+                Write-Good 'Flow Launcher set to MochaGlass with English labels.'
             } else {
-                Write-Note 'Flow Launcher settings not found; select TranslucentFlow manually in Settings > Theme.'
+                Write-Note 'Flow Launcher settings not found; select MochaGlass manually in Settings > Theme.'
             }
 
-            Add-Result 'Flow Launcher theme' 'installed' 'TranslucentFlow + English'
+            Add-Result 'Flow Launcher theme' 'installed' 'MochaGlass + English'
         } catch {
             Write-Bad "Flow Launcher configuration failed: $($_.Exception.Message)"
             Add-Result 'Flow Launcher theme' 'failed' $_.Exception.Message
@@ -1264,7 +1252,7 @@ if ($SkipConfigs) {
     }
 }
 
-# --- Step 6: device_status.exe ---------------------------------------------
+# --- Step 6: device_status.exe
 Write-Section '6/9  device_status.exe'
 
 if ($SkipWidget) {
@@ -1323,7 +1311,7 @@ if ($SkipWidget) {
     }
 }
 
-# --- Step 7: Windows Terminal ----------------------------------------------
+# --- Step 7: Windows Terminal
 Write-Section '7/9  Windows Terminal theme'
 
 if ($SkipTerminal) {
@@ -1425,7 +1413,7 @@ if ($SkipTerminal) {
     }
 }
 
-# --- Step 8: autostart ------------------------------------------------------
+# --- Step 8: autostart
 Write-Section '8/9  Autostart'
 
 if ($NoAutostart) {
@@ -1468,7 +1456,7 @@ if ($NoAutostart) {
     Add-Result 'Autostart' 'installed' 'Komorebi + YASB'
 }
 
-# --- Step 9: start ----------------------------------------------------------
+# --- Step 9: start
 Write-Section '9/9  Start'
 
 if ($NoStart) {
@@ -1530,7 +1518,7 @@ if ($NoStart) {
     Add-Result 'Start' 'installed' 'Komorebi + YASB'
 }
 
-# --- Summary ----------------------------------------------------------------
+# --- Summary
 Write-Section 'Summary'
 
 $script:Results | Format-Table -Property Component, Status, Detail -AutoSize
